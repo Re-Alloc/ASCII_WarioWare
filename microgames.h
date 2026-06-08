@@ -8,8 +8,14 @@ typedef struct{
     int (*run)(void);
     char game_message[100];
     char music_file[100]; 
-    
 } microgame; //Aquí tenemos el struct que define a un microjuego
+
+typedef struct{
+    char message[50];
+    char *array[10];
+    int size;
+} ping_class; //El struct para el minijuego del Ping
+
 
 /* Y estas son las funciones que vamos a usar para main.c y microgames.c*/
 

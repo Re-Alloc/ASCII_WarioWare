@@ -19,23 +19,36 @@ el microjuego de Ping, que es el que estoy desarrollando ahora mismo*/
 int microgame_ping(){
 
     char buffer[100];
+
+    ping_class classes[] = {
+        {"PING THE CLASS A IP!", {"10.212.6.1", "8.8.8.8", "10.0.0.1", "12.34.56.78", "25.3.0.67", "60.18.44.182", "99.27.224.79", "3.14.56.92", "126.8.22.44", "59.9.34.252"}, 10 },
+        {"PING THE CLASS B IP!", {"128.33.8.91", "173.9.37.154", "166.66.33.22", "132.87.0.2", "158.28.1.248", "191.0.0.4", "146.3.0.5", "181.30.73.29", "112.91.33.8", "132.182.83.74"}, 10},
+        {"PING THE CLASS C IP!", {"192.168.0.122", "251.22.33.99", "193.28.67.34", "212.22.3.8", "194.34.3.4", "228.30.20.70", "209.3.212.87", "198.76.54.32", "217.94.31.26", "192.73.8.14"}, 10}
+    };
+
+    int class = rand() % 3;
+    int random_ip = rand() % 10;
+    ping_class objective_class = classes[class];
+    
+
+    
+    
     char *ClassA_IPs[] = {"10.212.6.1", "8.8.8.8", "10.0.0.1", "12.34.56.78", "25.3.0.67", "60.18.44.182", "99.27.224.79", "3.14.56.92", "126.8.22.44", "59.9.34.252"};
     char *ClassB_IPs[] = {"128.33.8.91", "173.9.37.154", "166.66.33.22", "132.87.0.2", "158.28.1.248", "191.0.0.4", "146.3.0.5", "181.30.73.29", "112.91.33.8", "132.182.83.74"};
     char *ClassC_IPs[] = {"192.168.0.122", "251.22.33.99", "193.28.67.34", "212.22.3.8", "194.34.3.4", "228.30.20.70", "209.3.212.87", "198.76.54.32", "217.94.31.26", "192.73.8.14"};
-    char *Messages[] = {"PING THE CLASS A IP!", "PING THE CLASS B IP!", "PING THE CLASSS C IP!"};
 
     int RIP_1 = rand() % 10; //RIP = Random IP
     int RIP_2 = rand() % 10;
     int RIP_3 = rand() % 10;
-    int RMES = rand() %  3; // RMES = Random Message
-
+  
     char *RCAIP = ClassA_IPs[RIP_1]; //RCAIP = Random Class X IP
     char *RCBIP = ClassB_IPs[RIP_2];
     char *RCCIP = ClassC_IPs[RIP_3];
-    char *RSMES = Messages[RMES]; //RSMES = Random Selected Message
 
     clean_screen();
-    printf("%s\n", RSMES);
+    
+    printf("%s\n", objective_class.message);
+    printf("%s\n", objective_class.array[random_ip]);  
     printf("Use 'ping' followed by the number of the IP!\n");
     printf("\n");
     printf("1) %s\n", RCAIP);
@@ -43,7 +56,22 @@ int microgame_ping(){
     printf("3) %s\n", RCCIP);
     printf("\n");
     printf("player@linkware:~$ ");
+    fgets(buffer, sizeof(buffer), stdin);
+    buffer[strcspn(buffer, "\n")] = '\0';
     fflush(stdout);
+    printf("PING %s (%s) 56(84) bytes of data\n", objective_class.array[random_ip], objective_class.array[random_ip]);
+    printf("64 bytes from %s: icmp_seq=1 ttl=116 time=9.18 ms\n", objective_class.array[random_ip]);
+    sleep(1);
+    printf("64 bytes from %s: icmp_seq=1 ttl=116 time=8.63 ms\n", objective_class.array[random_ip]);
+    sleep(1);
+    printf("64 bytes from %s: icmp_seq=1 ttl=116 time=8.82 ms\n", objective_class.array[random_ip]);
+    sleep(1);
+    printf("64 bytes from %s: icmp_seq=1 ttl=116 time=8.67 ms\n", objective_class.array[random_ip]);
+    sleep(1);
+    puts("^C");
+    printf("--- %s ping statistics ---\n", objective_class.array[random_ip]);
+    puts("4 packets transmitted, 4 received, 0% packet loss, time 3005ms");
+    puts("rtt min/avg/max/mdev = 8.429./8.571/8.721/0.122 ms");
     sleep(5);
 
     return 0;
