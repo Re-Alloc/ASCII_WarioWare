@@ -115,7 +115,7 @@ int microgame_ping(){
         puts("4 packets transmitted, 4 received, 0% packet loss, time 3005ms");
         puts("rtt min/avg/max/mdev = 8.429./8.571/8.721/0.122 ms");
         printf("player@linkware:~$ \n");
-        sleep(3);
+        sleep(2);
 
         return 1;
         }
@@ -130,7 +130,7 @@ int microgame_ping(){
             puts("4 packets transmitted, 0 received, 100% packet loss, time 4250ms");
             printf("\n");
             printf("player@linkware:~$ \n");
-            sleep(3);
+            sleep(2);
             return 0;
         }
 
@@ -154,14 +154,14 @@ int microgame_ping(){
             puts("4 packets transmitted, 0 received, 100% packet loss, time 4250ms");
             printf("\n");
             printf("player@linkware:~$ \n");
-            sleep(3);
+            sleep(2);
             return 0;
         }
 
         else {
             printf("bash: $%s: command not found\n", buffer);
             printf("player@linkware-$ \n");
-            sleep(3);
+            sleep(2);
             return 0;
         }
 
@@ -211,13 +211,13 @@ int microgame_instructions(){
     fflush(stdout);
     if (strcmp(buffer, objective_instruction.answer) == 0){
 
-        printf("\nCORRECT COMMAND!\n");
+        printf("CORRECT COMMAND!\n");
         sleep(2);
         return 1;
     } 
     
     else{
-        printf("\nWRONG COMMAND!\n");
+        printf("WRONG COMMAND!\n");
         sleep(2);
         return 0;
     }
@@ -233,22 +233,43 @@ int microgame_code_error(){
     int time = 10;
     
 
-    code_error_class code_errors[] {
+    code_error_class code_errors[] = {
 
-        {"1 | int main() {\n2 |   int x = 5\n3 |   printf(\"%d\n\", x);\n4 | }", "2"}  
+        {"1 | int main() {\n2 |     int x = 5\n3 |     printf(\"%d\\n\", x);\n4 | }","line 2"},
+        {"5 | int main() {\n6 |     puts(\"Hello\");\n7 |", "line 7"},
+        {"1 | int x = 5;\n2 |\n3 | if (x = 5){\n4 |     puts(\"Five\");\n6 | }", "line 3"},
+        {"9 | char buffer[64];\n10 | fgets(buffer, sizeof(buffer), stdin);\n11 | if (buffer == \"hello\"){\n12 |     puts(\"Hi there!\");\n13 | }", "line 11"},
+     
 
-    }
+    };
 
-    int rand_code_error = rand() % 1;
+    int rand_code_error = rand() % 4;
+    code_error_class objective_code_error = code_errors[rand_code_error];
 
     clean_screen();
-    puts("Find the error!");
+    printf("TIME: %d\n", time);
+    puts("FIND THE ERROR!");
+    puts("Write \"line\" followed by the line number where the error is!");
+    puts("Example: line 33");
+    printf("\n");
+    printf("%s\n", objective_code_error.code_lines);
+    printf("\n");
+    printf("player@linkware:~$ ");
+    fgets(buffer, sizeof(buffer), stdin);
+    buffer[strcspn(buffer, "\n")] = '\0';
+    fflush(stdout);
+    if (strcmp(buffer, objective_code_error.line_error) == 0){
 
-
-
-
-
-    return 0;
+        printf("YOU FOUND THE ERROR!\n");
+        sleep(2);
+        return 1;
+    }
+    else{
+        printf("YOU DIDN'T FOUND THE ERROR\n");
+        sleep(2);
+        return 0;
+    }
+    
 }
 
 int microgame_press(){
@@ -287,7 +308,7 @@ microgame games[] = {
 
 
 int play_random_microgame(){ //Esta funcion selecciona un microjuego aleatorio y lo ejecuta
-    int index = rand() % 2; //rand() % 8; -> Este hay que descomentarlo cuando lo tenga los 8 microjuegos completados
+    int index = rand() % 3; //rand() % 8; -> Este hay que descomentarlo cuando lo tenga los 8 microjuegos completados
     microgame current_game = games[index];
     sleep(2);
     printf("%s\n", current_game.game_message);
