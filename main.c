@@ -54,12 +54,15 @@ int main(void){ //La funcion principal del programa
 
             case 2:
                 clean_screen();
+                fflush(stdout);
                 printf("/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/\n");
                 printf("\n");
-                printf("LinkWare | A WarioWare-style ASCII Game\n");
-                printf("Autor: WindWakerLink\n");
-                printf("Programmed entierly in C\n");
-                printf("This game currently has 8 microgames in total\n");
+                puts("LinkWare | A WarioWare-style ASCII Game");
+                puts("Author: WindWakerLink");
+                puts("Programmed entierly in C");
+                puts("Total microgames: 8");
+                puts("Completed microgames: 2");
+                puts("Version 2.0 comming soon...");
                 printf("\n");
                 printf("/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/\n");
                 printf("\n");
@@ -70,7 +73,7 @@ int main(void){ //La funcion principal del programa
 
             case 3:
                 printf("[ INFO ] Closing software, please wait...\n");
-                sleep(5);
+                sleep(2);
                 clean_screen();
                 run = 0;
                 break;

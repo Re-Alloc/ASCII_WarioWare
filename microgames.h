@@ -3,8 +3,6 @@
 
 typedef struct{
     char game_name[100];
-    int difficulty;
-    int max_time;
     int (*run)(void);
     char game_message[100];
     char music_file[100]; 
@@ -13,8 +11,19 @@ typedef struct{
 typedef struct{
     char message[50];
     char *array[10];
-    int size;
-} ping_class; //El struct para el minijuego del Ping
+} ping_class; //El struct para el microjuego del Ping
+
+typedef struct{
+    char current_directory[50];
+    char instruction[128];
+    char answer[64];
+
+} instruction_class; //Struct para el microjuego de las instruciones
+
+typedef struct{
+    char code_lines[256];
+    char line_error[8];
+} code_error_class; //Struct para el microjuego del error de código 
 
 
 /* Y estas son las funciones que vamos a usar para main.c y microgames.c*/
