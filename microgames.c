@@ -211,13 +211,13 @@ int microgame_instructions(){
     fflush(stdout);
     if (strcmp(buffer, objective_instruction.answer) == 0){
 
-        printf("\nCORRECT COMMAND!\n");
+        puts("CORRECT COMMAND!");
         sleep(2);
         return 1;
     } 
     
     else{
-        printf("\nWRONG COMMAND!\n");
+        puts("WRONG COMMAND!");
         sleep(2);
         return 0;
     }
@@ -233,22 +233,48 @@ int microgame_code_error(){
     int time = 10;
     
 
-    code_error_class code_errors[] {
+    code_error_class code_errors[] = {
 
-        {"1 | int main() {\n2 |   int x = 5\n3 |   printf(\"%d\n\", x);\n4 | }", "2"}  
+        {"1 | int main(){\n2 |     int x = 5\n3 |     printf(\"%d\\n\", x);\n4 | }", "line 2"},
+        {"5 | int main(){\n6 |     year = 2026;\n7 |     printf(\"%d\\n\", year);\n8 | }", "line 6"},
+        {"1 | int x = 5;\n2 |\n3 | if (x = 5){\n4 |     printf(\"Five\\n\");\n5 | }", "line 3"},
+        {" 9 | int time = 12;\n10 | char buffer[64];\n11 | fgets(buffer, sizeof(buffer), stdin);\n12 | if (buffer == \"hello\"){\n13 |     printf(\"Hi there!\\n\");", "line 12"},
+        {"1 | int numbers[10];\n2 |\n3 | numbers[10] = 42;\n4 |", "line 3"},
+        {"23 | int main(){\n24 |     char username[8];\n25 |\n26 |     strcpy(username, \"SuperAdmin\");\n27 |\n28 |     printf(\"%s\\n\", username);\n29 |\n30 | return 0;\n31 | }", "line 26"},
+        {"1 | int main(){\n2 |     char *name = NULL;\n3 |\n4 |     puts(\"Loading...\");\n5 |     sleep(2);\n6 |\n7 |     printf(\"%c\\n\", name);\n8 |     return 0;\n9 | }", "line 7"} 
 
-    }
+    };
 
-    int rand_code_error = rand() % 1;
+    int rand_code_error = rand() % 7;
+
+    code_error_class objective_code_error = code_errors[rand_code_error];
 
     clean_screen();
-    puts("Find the error!");
+    printf("TIME: %d\n", time);
+    puts("FIND THE ERROR!");
+    puts("Write \"line\" followed by the line number where the error is!");
+    puts("Example: line 33");
+    printf("\n");
+    printf("%s", objective_code_error.code_lines);
+    printf("\n");
+    printf("\n");
+    printf("player@linkware:~$ ");
+    fgets(buffer, sizeof(buffer), stdin);
+    buffer[strcspn(buffer, "\n")] = '\0';
+    if (strcmp(buffer, objective_code_error.line_error) == 0){
+        
+        printf("YOU FOUND THE ERROR!\n");
+        sleep(2);
+        return 1;
+    }
 
+    else{
 
+        puts("YOU DIDN'T FOUND THE ERROR");
+        sleep(2);
+        return 0;
+    }
 
-
-
-    return 0;
 }
 
 int microgame_press(){
@@ -287,7 +313,7 @@ microgame games[] = {
 
 
 int play_random_microgame(){ //Esta funcion selecciona un microjuego aleatorio y lo ejecuta
-    int index = rand() % 2; //rand() % 8; -> Este hay que descomentarlo cuando lo tenga los 8 microjuegos completados
+    int index = rand() % 3; //rand() % 8; -> Este hay que descomentarlo cuando lo tenga los 8 microjuegos completados
     microgame current_game = games[index];
     sleep(2);
     printf("%s\n", current_game.game_message);

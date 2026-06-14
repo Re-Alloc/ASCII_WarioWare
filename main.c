@@ -46,7 +46,7 @@ int main(void){ //La funcion principal del programa
         switch(option){ //Y aqui el switch con los casos posibles y sus resultados
             
             case 1:
-                printf("[ INFO ] Loading game, please wait...\n");
+                printf("[  INFO  ] Loading game, please wait...\n");
                 sleep(3);
                 start_game();
                 clean_screen();
@@ -61,7 +61,7 @@ int main(void){ //La funcion principal del programa
                 puts("Author: WindWakerLink");
                 puts("Programmed entierly in C");
                 puts("Total microgames: 8");
-                puts("Completed microgames: 2");
+                puts("Completed microgames: 3");
                 puts("Version 2.0 comming soon...");
                 printf("\n");
                 printf("/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/\n");
@@ -72,14 +72,14 @@ int main(void){ //La funcion principal del programa
                 break;
 
             case 3:
-                printf("[ INFO ] Closing software, please wait...\n");
+                printf("[  INFO  ] Closing software, please wait...\n");
                 sleep(2);
                 clean_screen();
                 run = 0;
                 break;
 
             default:
-                printf("[ ERROR ] Invalid input, please try again\n");
+                printf("[  ERROR  ] Invalid input, please try again\n");
                 sleep(1);
                 clean_screen();
                 break;
