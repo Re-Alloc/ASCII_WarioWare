@@ -5,7 +5,6 @@ typedef struct{
     char game_name[100];
     int (*run)(void);
     char game_message[100];
-    char music_file[100]; 
 } microgame; //Aquí tenemos el struct que define a un microjuego
 
 typedef struct{
@@ -23,8 +22,13 @@ typedef struct{
 typedef struct{
     char code_lines[256];
     char line_error[8];
-} code_error_class; //Struct para el microjuego del error de código 
+} code_error_class; //Struct para el microjuego del error de código y el de encontrar achivos en una lista
 
+typedef struct{
+    char message[64];
+    char possible_targets[256];
+    char target[16];
+} find_class;
 
 /* Y estas son las funciones que vamos a usar para main.c y microgames.c*/
 
