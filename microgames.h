@@ -2,7 +2,6 @@
 #define MICROGAMES_He
 
 typedef struct{
-    char game_name[100];
     int (*run)(void);
     char game_message[100];
 } microgame; //Aquí tenemos el struct que define a un microjuego

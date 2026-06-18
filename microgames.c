@@ -373,14 +373,14 @@ int microgame_escape(){
 
 
 microgame games[] = {
-    {"ping", microgame_ping, "PING THE CORRECT IP!"},
-    {"instructions", microgame_instructions, "FOLLOW THE INSTRUCTIONS!"},
-    {"code_error", microgame_code_error, "DETECT THE CODE ERROR!"},   
-    {"find", microgame_find, "FIND THE OBJECTIVE!"},
-    {"press", microgame_press, "PRESS THE CORRECT KEY!"},
-    {"memory", microgame_memory, "REMEMBER THE SEQUENCE!"},
-    {"not_press", microgame_not_press, "DO NOT PRESS ANYTHING!"},
-    {"escape", microgame_escape, "ESCAPE THE LABYRINTH!"},
+    {microgame_ping, "PING THE CORRECT IP!"},
+    {microgame_instructions, "FOLLOW THE INSTRUCTIONS!"},
+    {microgame_code_error, "DETECT THE CODE ERROR!"},   
+    {microgame_find, "FIND THE OBJECTIVE!"},
+    {microgame_press, "PRESS THE CORRECT KEY!"},
+    {microgame_memory, "REMEMBER THE SEQUENCE!"},
+    {microgame_not_press, "DO NOT PRESS ANYTHING!"},
+    {microgame_escape, "ESCAPE THE LABYRINTH!"},
   
 };
 
