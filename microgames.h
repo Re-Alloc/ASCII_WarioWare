@@ -29,7 +29,15 @@ typedef struct{
     char target[16];
 } find_class;
 
-/* Y estas son las funciones que vamos a usar para main.c y microgames.c*/
+typedef struct{
+    char sequence[256];
+    char answer[64];
+} memory_class;
+
+
+/* Y estas son las funciones que vamos a usar para main.c y microgames.c
+(Algunas fuciones no se van a usar porque son para la v 2.0 pero las he hecho
+porque no tenía nada mejor que hacer)*/
 
 int start_game();
 void play_music(const char *game_music_file);

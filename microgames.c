@@ -47,19 +47,21 @@ int microgame_ping(){
 
     //Arriba elegimos una clase e IP random y las IPs de distracción y eso
 
-
     if (class == 0){
-        distraction_class  = classes[1];
-        distraction_class2 = classes[2];
+    distraction_class  = classes[1];
+    distraction_class2 = classes[2];
     }
+
     else if (class == 1){
         distraction_class = classes[2];
         distraction_class2 = classes[0];
     }
+
     else if (class == 2){
         distraction_class = classes[0];
         distraction_class2 = classes[1];
     }
+
 
     /* Arriba declaramos que si la IP es de un tipo, las 2 IPs restantes tienen que ser de otro tipo*/
     
@@ -68,7 +70,7 @@ int microgame_ping(){
 
     for (int i = 0, j = 0; i <= 2; i++){
         j = rand() % 3;
-        char* temp = ip_list[i];        
+        char *temp = ip_list[i];        
         ip_list[i] = ip_list[j];
         ip_list[j] = temp;
         
@@ -80,14 +82,15 @@ int microgame_ping(){
     clean_screen();
     
     printf("TIME: %d\n", start_time);
+    puts("");
     printf("%s\n", objective_class.message);
-    printf("Use 'ping' followed by the number of the IP!\n");
-    printf("Example: ping 8\n");
+    puts("Use 'ping' followed by the number of the IP!");
+    puts("Example: ping 8");
     printf("\n");
     printf("1) %s\n", ip_list[0]);
     printf("2) %s\n", ip_list[1]);
     printf("3) %s\n", ip_list[2]);
-    printf("\n");
+    puts("");
     printf("player@linkware:~$ ");
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
@@ -122,7 +125,7 @@ int microgame_ping(){
     puts("4 packets transmitted, 4 received, 0% packet loss, time 3005ms");
     puts("rtt min/avg/max/mdev = 8.429./8.571/8.721/0.122 ms");
     printf("player@linkware:~$ \n");
-    sleep(3);
+    sleep(2);
 
     return 1;
     }
@@ -133,9 +136,9 @@ int microgame_ping(){
         puts("^C");
         printf("--- %s ping statistics ---\n", ip_list[0]);
         puts("4 packets transmitted, 0 received, 100% packet loss, time 4250ms");
-        printf("\n");
+        puts("");
         printf("player@linkware:~$ \n");
-        sleep(3);
+        sleep(2);
         return 0;
     }
 
@@ -145,9 +148,9 @@ int microgame_ping(){
         puts("^C");
         printf("--- %s ping statistics ---\n", ip_list[1]);
         puts("4 packets transmitted, 0 received, 100% packet loss, time 4250ms");
-        printf("\n");
+        puts("");
         printf("player@linkware:~$ \n");
-        sleep(3);
+        sleep(2);
         return 0;
     }
 
@@ -157,16 +160,16 @@ int microgame_ping(){
         puts("^C");
         printf("--- %s ping statistics ---\n", ip_list[2]);
         puts("4 packets transmitted, 0 received, 100% packet loss, time 4250ms");
-        printf("\n");
+        puts("");
         printf("player@linkware:~$ \n");
-        sleep(3);
+        sleep(2);
         return 0;
     }
 
     else {
         printf("bash: $%s: command not found\n", buffer);
         printf("player@linkware-$ \n");
-        sleep(3);
+        sleep(2);
         return 0;
     }
 
@@ -207,10 +210,11 @@ int microgame_instructions(){
 
     clean_screen();
     printf("TIME: %d\n", start_time);
+    puts("");
     printf("%s\n", target_instruction.current_directory);
     printf("OBJECTIVE: %s\n", target_instruction.instruction);
     puts("NOTE: All instructions must be done using ONLY ONE command line");
-    printf("\n");
+    puts("");
     printf("player@linkware:~$ ");
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
@@ -223,16 +227,16 @@ int microgame_instructions(){
         return 0;
     }
 
-    if (strcmp(buffer, target_instruction.answer) == 0){
+    if (strcmp(buffer, target_instruction.answer) != 0){
 
-        puts("CORRECT COMMAND!");
+        puts("WRONG COMMAND!");
         sleep(2);
-        return 1;
+        return 0;
     } 
     
-    puts("WRONG COMMAND!");
+    puts("CORRECT COMMAND!");
     sleep(2);
-    return 0;
+    return 1;
     
     /*Esto de arriba ya se ha visto antes: se imprime el tiempo, el directorio en el que supuestamente estás,
     la instrucción a seguir, una nota para indicar que todos los comandos hay que hacerlos en una sola línea
@@ -265,13 +269,14 @@ int microgame_code_error(){
 
     clean_screen();
     printf("TIME: %d\n", start_time);
+    puts("");
     puts("FIND THE ERROR!");
     puts("Write \"line\" followed by the line number where the error is!");
     puts("Example: line 33");
-    printf("\n");
+    puts("");
     printf("%s", target_code_error.code_lines);
-    printf("\n");
-    printf("\n");
+    puts("");
+    puts("");
     printf("player@linkware:~$ ");
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
@@ -285,16 +290,16 @@ int microgame_code_error(){
         return 0;
     }
 
-    if (strcmp(buffer, target_code_error.line_error) == 0){
+    if (strcmp(buffer, target_code_error.line_error) != 0){
         
-        printf("YOU FOUND THE ERROR!\n");
+        puts("YOU DIDN'T THE ERROR!");
         sleep(2);
-        return 1;
+        return 0;
     }
 
-    puts("YOU DIDN'T FOUND THE ERROR");
+    puts("YOU FOUND THE ERROR!");
     sleep(2);
-    return 0;
+    return 1;
 
     //Y esta parte del código es prácticamente igual a los otros microjuegos 
 
@@ -314,6 +319,8 @@ int microgame_find(){
         {"Find the suspicious file!", "ball.png debian-13.iso fantasy-book.pdf keylogger.py roblox-script.lua", "keylogger.py"}
 
 
+        //Me he cansdo de explicar esta parte de arriba
+
     };
 
     int random_target = rand() % 6;
@@ -321,13 +328,14 @@ int microgame_find(){
 
     clean_screen();
     printf("TIME: %d\n", start_time);
+    puts("");
     printf("OBJECTIVE: %s\n", find_target.message);
-    printf("\n");
-    printf("NOTE: This is what you should write depending of the target:\n-File/dir: write the file/dir name\n-IP: write the number before the IP address\n");
-    printf("\n");
+    puts("");
+    puts("NOTE: This is what you should write depending of the target:\n-File/dir: write the file/dir name\n-IP: write the number before the IP address");
+    puts("");
     printf("%s\n", find_target.possible_targets);
-    printf("\n");
-    printf("\n");
+    puts("");
+    puts("");
     printf("player@linkware:~$ ");
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
@@ -340,24 +348,84 @@ int microgame_find(){
         return 0;
     }
 
-    if (strcmp(buffer, find_target.target) == 0){
-        puts("YOU FOUND THE TARGET!");
-        sleep(1);
-        return 1;
+    if (strcmp(buffer, find_target.target) != 0){
+        puts("YOU DIDN'T FOUND THE TARGET!");
+        sleep(2);
+        return 0;
     }
 
-    puts("YOU DIDN'T FOUND THE TARGET!");
-    sleep(1);
-    return 0;
+    puts("YOU FOUND THE TARGET!");
+    sleep(2);
+    return 1;
+ 
+    //Y también me he cansado de explicar lo que hace esta otra parte de arriba
 
 }
+int microgame_memory(){
+
+    char buffer[64];
+    int start_time = 10;
+    
+
+    memory_class sequences[] = {
+        {"3) malloc\n1) pointer\n2) array\n4) struct" , "pointer array malloc struct"},
+        {"1) linux\n2) kernel\n3) bash ", "linux kernel bash"},
+        {"4) kotlin\n2) python\n3) java\n1) rust", "rust python java kotlin"},
+        {"2) ls\n3) man\n5) grep\n1) mkdir\n4)sudo", "mkdir ls man sudo grep"},
+        {"2) /usr\n1) /tmp\n3) /home\n4) /mnt", "/tmp /usr /home /mnt"}
+
+    };
+
+    int random_sequence = rand() % 5;
+
+    memory_class target_sequence = sequences[random_sequence];
+
+    clean_screen();
+    puts("YOU HAVE THREE SECONDS TO MEMORIZE THIS SEQUENCE!");
+    puts("");
+    printf("%s", target_sequence.sequence);
+    fflush(stdout);
+    sleep(3);
+    clean_screen();
+
+    int start = time(NULL);
+    printf("TIME: %d", start_time);
+    puts("");
+    puts("You must write all the words in order, in lowercase and separated with a space!");
+    puts("");
+    printf("player@linkware:~$ ");
+    fgets(buffer, sizeof(buffer), stdin);
+    buffer[strcspn(buffer, "\n")] = '\0';
+    fflush(stdout);
+    int time_left = time(NULL) - start;
+
+    if (time_left > start_time){
+        puts("TIME'S OUT!");
+        sleep(2);
+        return 0;
+    }
+
+    if (strcmp(buffer, target_sequence.answer) != 0){
+        puts("WRONG ANSWER!");
+        sleep(2);
+        return 0;
+    }
+
+    puts("CORRECT ANSWER!");
+    sleep(2);
+    return 1;
+}
+
 
 
 int microgame_press(){
-    return 0;
-}
+    
+    char buffer[64];
+    int start_time = 10;
+    int start = time(NULL);
+    
 
-int microgame_memory(){
+
     return 0;
 }
 
@@ -377,8 +445,8 @@ microgame games[] = {
     {microgame_instructions, "FOLLOW THE INSTRUCTIONS!"},
     {microgame_code_error, "DETECT THE CODE ERROR!"},   
     {microgame_find, "FIND THE OBJECTIVE!"},
-    {microgame_press, "PRESS THE CORRECT KEY!"},
     {microgame_memory, "REMEMBER THE SEQUENCE!"},
+    {microgame_press, "PRESS THE CORRECT KEY!"},
     {microgame_not_press, "DO NOT PRESS ANYTHING!"},
     {microgame_escape, "ESCAPE THE LABYRINTH!"},
   
@@ -388,7 +456,7 @@ microgame games[] = {
 
 
 int play_random_microgame(){ //Esta funcion selecciona un microjuego aleatorio y lo ejecuta
-    int index = rand() % 4; //rand() % 8; -> Este hay que descomentarlo cuando lo tenga los 8 microjuegos completados
+    int index = rand() % 5; //rand() % 8; -> Este hay que descomentarlo cuando lo tenga los 8 microjuegos completados
     microgame current_game = games[index];
     sleep(2);
     printf("%s\n", current_game.game_message);
@@ -410,13 +478,13 @@ int start_game(){ //Este es el bucle principal del juego, en el que se muestra l
 
         if (result == LOSE){
             lives--;
-            printf("FAILURE!\n");
+            puts("FAILURE!");
             round++;
             sleep(2);
             clean_screen();
         }
         else{
-            printf("SUCCESS!\n");
+            puts("SUCCESS!");
             round++;
             sleep(2);
             clean_screen();
@@ -424,7 +492,7 @@ int start_game(){ //Este es el bucle principal del juego, en el que se muestra l
         
     }
 
-    printf("GAME OVER\n");
+    puts("GAME OVER");
     sleep(3);
     return 0; 
 }

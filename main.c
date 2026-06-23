@@ -13,20 +13,20 @@
 
 
 void print_logo(void){
-    printf("=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=\n");
-    printf("\n");
-    printf(" ▄        ▀           █     ▄     ▄                     \n");
-    printf(" █      ▄▄▄    ▄ ▄▄   █   ▄ █  █  █  ▄▄▄    ▄ ▄▄   ▄▄▄  \n");
-    printf(" █        █    █▀  █  █ ▄▀  ▀ █▀█ █ ▀   █   █▀  ▀ █▀  █ \n");
-    printf(" █        █    █   █  █▀█    ██ ██▀ ▄▀▀▀█   █     █▀▀▀▀ \n");
-    printf(" █▄▄▄▄▄ ▄▄█▄▄  █   █  █  ▀▄  █   █  ▀▄▄▀█   █     ▀█▄▄▀ \n");
-    printf("\n");
-    printf(" ▙▗▌▗                           ▗▀▖                                          ▐ \n");
-    printf(" ▌▘▌▄ ▞▀▖▙▀▖▞▀▖▞▀▌▝▀▖▛▚▀▖▞▀▖▞▀▘ ▐  ▞▀▖▙▀▖ ▛▀▖▙▀▖▞▀▖▞▀▌▙▀▖▝▀▖▛▚▀▖▛▚▀▖▞▀▖▙▀▖▞▀▘▐ \n");
-    printf(" ▌ ▌▐ ▌ ▖▌  ▌ ▌▚▄▌▞▀▌▌▐ ▌▛▀ ▝▀▖ ▜▀ ▌ ▌▌   ▙▄▘▌  ▌ ▌▚▄▌▌  ▞▀▌▌▐ ▌▌▐ ▌▛▀ ▌  ▝▀▖▝ \n");
-    printf(" ▘ ▘▀▘▝▀ ▘  ▝▀ ▗▄▘▝▀▘▘▝ ▘▝▀▘▀▀  ▐  ▝▀ ▘   ▌  ▘  ▝▀ ▗▄▘▘  ▝▀▘▘▝ ▘▘▝ ▘▝▀▘▘  ▀▀ ▝ \n");
-    printf("\n");
-    printf("=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=\n");
+    puts("=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=");
+    puts("");
+    puts(" ▄        ▀           █     ▄     ▄                     ");
+    puts(" █      ▄▄▄    ▄ ▄▄   █   ▄ █  █  █  ▄▄▄    ▄ ▄▄   ▄▄▄  ");
+    puts(" █        █    █▀  █  █ ▄▀  ▀ █▀█ █ ▀   █   █▀  ▀ █▀  █ ");
+    puts(" █        █    █   █  █▀█    ██ ██▀ ▄▀▀▀█   █     █▀▀▀▀ ");
+    puts(" █▄▄▄▄▄ ▄▄█▄▄  █   █  █  ▀▄  █   █  ▀▄▄▀█   █     ▀█▄▄▀ ");
+    puts("");
+    puts(" ▙▗▌▗                           ▗▀▖                                          ▐ ");
+    puts(" ▌▘▌▄ ▞▀▖▙▀▖▞▀▖▞▀▌▝▀▖▛▚▀▖▞▀▖▞▀▘ ▐  ▞▀▖▙▀▖ ▛▀▖▙▀▖▞▀▖▞▀▌▙▀▖▝▀▖▛▚▀▖▛▚▀▖▞▀▖▙▀▖▞▀▘▐ ");
+    puts(" ▌ ▌▐ ▌ ▖▌  ▌ ▌▚▄▌▞▀▌▌▐ ▌▛▀ ▝▀▖ ▜▀ ▌ ▌▌   ▙▄▘▌  ▌ ▌▚▄▌▌  ▞▀▌▌▐ ▌▌▐ ▌▛▀ ▌  ▝▀▖▝ ");
+    puts(" ▘ ▘▀▘▝▀ ▘  ▝▀ ▗▄▘▝▀▘▘▝ ▘▝▀▘▀▀  ▐  ▝▀ ▘   ▌  ▘  ▝▀ ▗▄▘▘  ▝▀▘▘▝ ▘▘▝ ▘▝▀▘▘  ▀▀ ▝ ");
+    puts("");
+    puts("=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=");
     
 
 } //Imprimimos el logo del juego
@@ -38,7 +38,7 @@ int main(void){ //La funcion principal del programa
     clean_screen();
     while(run){ //Aqui tenemos el bucle del menu y sus opciones
         print_logo();
-        printf("\n");
+        puts("");
         printf("[1] Play \n[2] Credits\n[3] Exit\nYour choice: ");
         fgets(buffer, sizeof(buffer), stdin);
         buffer[strcspn(buffer, "\n")] = '\0';
@@ -46,7 +46,7 @@ int main(void){ //La funcion principal del programa
         switch(option){ //Y aqui el switch con los casos posibles y sus resultados
             
             case 1:
-                printf("[  INFO  ] Loading game, please wait...\n");
+                puts("[  INFO  ] Loading game, please wait...");
                 sleep(3);
                 start_game();
                 clean_screen();
@@ -55,31 +55,32 @@ int main(void){ //La funcion principal del programa
             case 2:
                 clean_screen();
                 fflush(stdout);
-                printf("/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/\n");
-                printf("\n");
-                puts("LinkWare | A WarioWare-style ASCII Game");
-                puts("Author: WindWakerLink");
-                puts("Programmed entierly in C");
-                puts("Total microgames: 8");
-                puts("Completed microgames: 4");
-                puts("Version 2.0 comming soon...");
-                printf("\n");
-                printf("/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/\n");
-                printf("\n");
-                printf("Prees ENTER to go back to the menu...");
+                puts("/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/");
+                puts("");
+                puts("- LinkWare | A WarioWare-style ASCII Game");
+                puts("- Author: WindWakerLink");
+                puts("- Game programmed entierly in C");
+                puts("- Total microgames: 8");
+                puts("- Completed microgames: 5");
+                puts("- Version 2.0 comming soon...");
+                puts("");
+                puts("/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/");
+                puts("");
+                printf("Prees ENTER to go back to the menu... ");
                 fgets(back_to_menu, sizeof(back_to_menu), stdin);
+                fflush(stdout);
                 clean_screen();
                 break;
 
             case 3:
-                printf("[  INFO  ] Closing software, please wait...\n");
+                puts("[  INFO  ] Closing software, please wait...");
                 sleep(2);
                 clean_screen();
                 run = 0;
                 break;
 
             default:
-                printf("[  ERROR  ] Invalid input, please try again\n");
+                puts("[  ERROR  ] Invalid input, please try again");
                 sleep(1);
                 clean_screen();
                 break;
