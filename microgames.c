@@ -421,12 +421,51 @@ int microgame_memory(){
 int microgame_press(){
     
     char buffer[64];
-    int start_time = 10;
+    int start_time = 7;
     int start = time(NULL);
-    
 
+    press_class cases[] = {
+        {"PRESS A FIVE TIMES", "aaaaa"},
+        {"PRESS H 1 TIME AND J 3 TIMES", "hjjj"},
+        {"PRESS / 2 TIMES, D FOR 2 TIMES AND P FOR 1 TIME", "//ddp"},
+        {"PRESS Z 3 TIMES", "zzz"},
+        {"PRESS ; 4 times and R 2 times", ";;;;rr"},
+        {"PRESS G 3 TIMES, Y 2 TIMES AND V 1 TIME", "gggyyv"},
+        {"PRESS @", "@"},
+        {"PRESS 6 6 TIMES AND 7 7 TIMES", "6666667777777"},
+    };
 
-    return 0;
+    int random_case = rand() % 8;
+    press_class objective_press = cases[random_case];
+
+    clean_screen();
+    printf("TIME: %d", start_time);
+    puts("");
+    puts("");
+    printf("%s\n", objective_press.message);
+    puts("NOTE: you must press all the keys in lowercase and without spaces!");
+    puts("Once you're done pressing the keys, hit ENTER");
+    puts("");
+    printf("player@linkware:~$ ");
+    fgets(buffer, sizeof(buffer), stdin);
+    buffer[strcspn(buffer, "\n")] = '\0';
+    int time_left = time(NULL) - start;
+
+    if (time_left > start_time){
+        puts("TIME'S OUT!");
+        sleep(2);
+        return 0;
+    }
+
+    if (strcmp(buffer, objective_press.answer) != 0){
+        puts("WRONG ANSWER!");
+        sleep(2);
+        return 0;
+    }
+
+    puts("CORRECT ANSWER!");
+    sleep(2);
+    return 1;
 }
 
 int microgame_not_press(){
@@ -446,7 +485,7 @@ microgame games[] = {
     {microgame_code_error, "DETECT THE CODE ERROR!"},   
     {microgame_find, "FIND THE OBJECTIVE!"},
     {microgame_memory, "REMEMBER THE SEQUENCE!"},
-    {microgame_press, "PRESS THE CORRECT KEY!"},
+    {microgame_press, "PRESS THE CORRECT KEY OR KEYS!"},
     {microgame_not_press, "DO NOT PRESS ANYTHING!"},
     {microgame_escape, "ESCAPE THE LABYRINTH!"},
   
@@ -456,7 +495,7 @@ microgame games[] = {
 
 
 int play_random_microgame(){ //Esta funcion selecciona un microjuego aleatorio y lo ejecuta
-    int index = rand() % 5; //rand() % 8; -> Este hay que descomentarlo cuando lo tenga los 8 microjuegos completados
+    int index = 5;//rand() % 5; //rand() % 8; -> Este hay que descomentarlo cuando lo tenga los 8 microjuegos completados
     microgame current_game = games[index];
     sleep(2);
     printf("%s\n", current_game.game_message);

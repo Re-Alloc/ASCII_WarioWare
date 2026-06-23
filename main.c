@@ -61,7 +61,7 @@ int main(void){ //La funcion principal del programa
                 puts("- Author: WindWakerLink");
                 puts("- Game programmed entierly in C");
                 puts("- Total microgames: 8");
-                puts("- Completed microgames: 5");
+                puts("- Completed microgames: 6");
                 puts("- Version 2.0 comming soon...");
                 puts("");
                 puts("/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/");

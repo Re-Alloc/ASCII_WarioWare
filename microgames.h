@@ -34,6 +34,11 @@ typedef struct{
     char answer[64];
 } memory_class;
 
+typedef struct{
+    char message[64];
+    char answer[16];
+} press_class;
+
 
 /* Y estas son las funciones que vamos a usar para main.c y microgames.c
 (Algunas fuciones no se van a usar porque son para la v 2.0 pero las he hecho
