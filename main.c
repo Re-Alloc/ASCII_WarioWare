@@ -5,10 +5,29 @@
 #include "microgames.h"
 #include <SDL2/SDL_mixer.h>
 
-
+// NOTA: VOY A COMENTAR LA SECUENICA DE CARGA DEL JUEGO PARA DEBUGGEAR MÁS RÁPIDO
+// QUE NO SE ME OLVIDE DESCOMENTARLO UNA VEZ TERMINADO EL JUEGO
 
  void clean_screen(){ //Funcion para limpiar la pantalla
     printf("\033[H\033[J");
+}
+
+
+ void loading_bar(char custom_message[], int delay){
+    char bar[] = "---------------------";
+    int number = 21;
+    printf("%s", custom_message);
+    fflush(stdout);
+    usleep(800000);
+    for (int i = 0; i < number; i++){
+        fflush(stdout);
+        bar[i] = '#';
+        if (bar[i] != 0) bar[i - 1]  = '#';
+        int percentaje = i * 5;
+        printf("\r%s  [%s] {%d%}",custom_message, bar, percentaje);
+        usleep(delay);
+        fflush(stdout);
+    };
 }
 
 
@@ -39,15 +58,19 @@ int main(void){ //La funcion principal del programa
     while(run){ //Aqui tenemos el bucle del menu y sus opciones
         print_logo();
         puts("");
-        printf("[1] Play \n[2] Credits\n[3] Exit\nYour choice: ");
+        printf("[1] Play \n[2] Credits\n[3] Exit\n\nYour choice: ");
         fgets(buffer, sizeof(buffer), stdin);
         buffer[strcspn(buffer, "\n")] = '\0';
         int option = atoi(buffer);
         switch(option){ //Y aqui el switch con los casos posibles y sus resultados
             
             case 1:
-                puts("[  INFO  ] Loading game, please wait...");
-                sleep(3);
+                puts("");
+                loading_bar("[  INFO  ] Loading game, please wait...", 300000);
+                puts("");
+                sleep(1);
+                puts("[  OK  ] Game sucessfully loaded!");
+                sleep(2);
                 start_game();
                 clean_screen();
                 break;
@@ -59,9 +82,9 @@ int main(void){ //La funcion principal del programa
                 puts("");
                 puts("- LinkWare | A WarioWare-style ASCII Game");
                 puts("- Author: WindWakerLink");
-                puts("- Game programmed entierly in C");
+                puts("- Game programmed entirely in C");
                 puts("- Total microgames: 8");
-                puts("- Completed microgames: 6");
+                puts("- Completed microgames: 7");
                 puts("- Version 2.0 comming soon...");
                 puts("");
                 puts("/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/");
@@ -73,8 +96,8 @@ int main(void){ //La funcion principal del programa
                 break;
 
             case 3:
-                puts("[  INFO  ] Closing software, please wait...");
-                sleep(2);
+                loading_bar("[  INFO  ] Closing software, please wait...", 200000);
+                usleep(800000);
                 clean_screen();
                 run = 0;
                 break;

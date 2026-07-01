@@ -12,14 +12,11 @@ static void clean_screen(){
 }
 
 /* TODO: voy a cambiar la selección de juego aletorio temporalmente para que solamente se elija
-el microjuego de las errores de código
+el microjuego en el que estoy trabajando
 
-   TODO: recuerda poner comentarios en todo lo que haces para no perderte
-
-   NOTA: ya he terminado de hacer 4 de los 8 microjuegos (VENGA, ME QUEDA POCO :) ) 
-   
-   
-
+    TODO: termninar el microjuego del laberinto
+    TODO: recordar poner comentarios en todo lo que hago para no perderme
+    NOTA: ya he terminado de hacer 6 de los 8 microjuegos (VENGA, ME QUEDA POCO :) ) 
 
 */
 
@@ -468,34 +465,143 @@ int microgame_press(){
     return 1;
 }
 
+
+int microgame_escape(){
+
+    /*
+    
+    #######
+    #P # E#
+    #  #  #  -> Así es como debería verse el laberinto
+    #     #
+    #######
+    
+    */
+
+    int win_con = 0; // -> condición de victoria
+    char buffer[64];
+    char matrix[5][8] = {"#######", "#P # E#", "#  #  #",  "#     #", "#######" };
+    
+    //La posición en este caso del jugador es matrix[1][0][1]
+    
+   
+    int row = 1;
+    int index = 1;
+
+    while (win_con == 0){
+        clean_screen();
+        for (int i = 0; i <= 4; i++){
+            printf("%s", matrix[i]);
+            puts("");
+            
+        }
+        puts("");
+        puts("");
+        puts("");
+        printf("player@linkware:~$ ");
+        fgets(buffer, sizeof(buffer), stdin);
+        buffer[strcspn(buffer, "\n")] = '\0';
+        fflush(stdout);
+        
+        if (strcmp(buffer, "w") == 0 ){
+
+            if (matrix[row - 1][index] != '#'){
+                if (matrix[row -1][index] == 'E'){
+                    matrix[row - 1][index] = matrix[row][index];
+                    matrix[row][index] = ' ';
+                    win_con = 1;
+                }
+                matrix[row - 1][index] = matrix[row][index];
+                matrix[row][index] = ' ';
+                row--;
+            }
+
+
+            }
+
+        if (strcmp(buffer, "a") == 0 ){
+
+            if (matrix[row][index - 1] != '#'){
+                if (matrix[row][index - 1] == 'E'){
+                    matrix[row][index - 1] = matrix[row][index];
+                    matrix[row][index] = ' ';
+                    win_con = 1;
+                }
+                matrix[row][index - 1] = matrix[row][index];
+                matrix[row][index] = ' ';
+                index--;
+            }
+            
+            }
+
+        if (strcmp(buffer, "s") == 0 ){
+
+            if (matrix[row + 1][index] != '#'){
+                if (matrix[row + 1][index] == 'E'){
+                    matrix[row + 1][index] = matrix[row][index];
+                    matrix[row][index] = ' ';
+                    win_con = 1;
+                }
+                matrix[row + 1][index] = matrix[row][index];
+                matrix[row][index] = ' ';
+                row++;
+            }
+            
+            }
+        if (strcmp(buffer, "d") == 0 ){
+
+            if (matrix[row][index + 1] != '#'){
+                if (matrix[row][index + 1] == 'E'){
+                    matrix[row][index + 1] = matrix[row][index];
+                    matrix[row][index] = ' ';
+                    win_con = 1;
+                }
+                matrix[row][index + 1] = matrix[row][index];
+                matrix[row][index] = ' ';
+                index++;
+            }
+            
+            }
+        }
+    clean_screen();
+    for (int i = 0; i <= 4; i++){
+        printf("%s", matrix[i]);
+        puts("");
+        
+    }
+    puts("");
+    puts("");
+    puts("");
+    printf("player@linkware:~$ ");
+    puts("");
+    puts("YOU FOUND THE EXIT!");
+    sleep(2);
+    return 1;
+}
+    
+   
+
+
 int microgame_not_press(){
     return 0;
 }
-
-
-int microgame_escape(){
-    return 0;
-}
-
-
 
 microgame games[] = {
     {microgame_ping, "PING THE CORRECT IP!"},
     {microgame_instructions, "FOLLOW THE INSTRUCTIONS!"},
     {microgame_code_error, "DETECT THE CODE ERROR!"},   
-    {microgame_find, "FIND THE OBJECTIVE!"},
+    {microgame_find, "FIND THE TARGET!"},
     {microgame_memory, "REMEMBER THE SEQUENCE!"},
     {microgame_press, "PRESS THE CORRECT KEY OR KEYS!"},
-    {microgame_not_press, "DO NOT PRESS ANYTHING!"},
     {microgame_escape, "ESCAPE THE LABYRINTH!"},
-  
+    {microgame_not_press, "DO NOT PRESS ANYTHING!"},
 };
 
 //Este es el array que contiene toda la info sobre los microjuegos que hay
 
 
 int play_random_microgame(){ //Esta funcion selecciona un microjuego aleatorio y lo ejecuta
-    int index = 5;//rand() % 5; //rand() % 8; -> Este hay que descomentarlo cuando lo tenga los 8 microjuegos completados
+    int index = 6;//rand() % 6; //rand() % 8; -> Este hay que descomentarlo cuando lo tenga los 8 microjuegos completados
     microgame current_game = games[index];
     sleep(2);
     printf("%s\n", current_game.game_message);
