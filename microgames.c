@@ -368,7 +368,7 @@ int microgame_memory(){
         {"3) malloc\n1) pointer\n2) array\n4) struct" , "pointer array malloc struct"},
         {"1) linux\n2) kernel\n3) bash ", "linux kernel bash"},
         {"4) kotlin\n2) python\n3) java\n1) rust", "rust python java kotlin"},
-        {"2) ls\n3) man\n5) grep\n1) mkdir\n4)sudo", "mkdir ls man sudo grep"},
+        {"2) ls\n3) man\n5) grep\n1) mkdir\n4) sudo", "mkdir ls man sudo grep"},
         {"2) /usr\n1) /tmp\n3) /home\n4) /mnt", "/tmp /usr /home /mnt"}
 
     };
@@ -487,9 +487,13 @@ int microgame_escape(){
    
     int row = 1;
     int index = 1;
+    int start_time = 10;
+    int start = time(NULL);
 
     while (win_con == 0){
         clean_screen();
+        printf("TIME: %d\n", start_time);
+        puts("");
         for (int i = 0; i <= 4; i++){
             printf("%s", matrix[i]);
             puts("");
@@ -497,11 +501,21 @@ int microgame_escape(){
         }
         puts("");
         puts("");
+        puts("GO TO THE EXIT");
+        puts("CONTROLS: w -> up, a -> left, s -> down, d -> right");
+        puts("You must put the direction you want to move, then hit ENTER to move");
         puts("");
         printf("player@linkware:~$ ");
         fgets(buffer, sizeof(buffer), stdin);
         buffer[strcspn(buffer, "\n")] = '\0';
         fflush(stdout);
+        int time_left = time(NULL) - start;
+
+        if (time_left > start_time){
+            puts("TIME'S OUT!");
+            sleep(2);
+            return 0;
+        }
         
         if (strcmp(buffer, "w") == 0 ){
 
@@ -564,6 +578,8 @@ int microgame_escape(){
             }
         }
     clean_screen();
+    printf("TIME: %d\n", start_time);
+    puts("");
     for (int i = 0; i <= 4; i++){
         printf("%s", matrix[i]);
         puts("");
@@ -571,6 +587,9 @@ int microgame_escape(){
     }
     puts("");
     puts("");
+    puts("GO TO THE EXIT");
+    puts("CONTROLS: w -> up, a -> left, s -> down, d -> right");
+    puts("You must put the direction you want to move, then hit ENTER to move");
     puts("");
     printf("player@linkware:~$ ");
     puts("");
@@ -601,7 +620,7 @@ microgame games[] = {
 
 
 int play_random_microgame(){ //Esta funcion selecciona un microjuego aleatorio y lo ejecuta
-    int index = 6;//rand() % 6; //rand() % 8; -> Este hay que descomentarlo cuando lo tenga los 8 microjuegos completados
+    int index = rand() % 7; //rand() % 8; -> Este hay que descomentarlo cuando lo tenga los 8 microjuegos completados
     microgame current_game = games[index];
     sleep(2);
     printf("%s\n", current_game.game_message);
