@@ -517,7 +517,7 @@ int microgame_escape(){
             return 0;
         }
         
-        if (strcmp(buffer, "w") == 0 ){
+        if (strcmp(buffer, "w") == 0 ){ //Los 4 ifs de abajo son para el movimiento del jugador
 
             if (matrix[row - 1][index] != '#'){
                 if (matrix[row -1][index] == 'E'){
@@ -598,11 +598,53 @@ int microgame_escape(){
     return 1;
 }
     
-   
+int microgame_ports(){
+    
+    char buffer[64];
+    int start_time = 10;
+    int start = time(NULL);
 
+    ports_class ports[] = {
+        {"Port: ", "80", "http"},
+        {"Service: ", "HTTPS", "443"},
+        {"Port: ", "143", "imap"},
+        {"Service: ", "DHCP", "67"},
+        {"Port: ", "53", "dns"},
+        {"Service: ", "FTP", "21"},
+        {"Port: ", "22", "ssh"},
+    };
 
-int microgame_not_press(){
-    return 0;
+    int random_port = rand() % 7;
+    ports_class target_port = ports[random_port];
+
+    clean_screen();
+    printf("TIME: %d\n",  start_time);
+    puts("");
+    puts("Write the port or service (in lowercase)!");
+    puts("");
+    printf("%s%s", target_port.type, target_port.port_or_service);
+    puts("");
+    puts("");
+    printf("player@linkware:~$ ");
+    fgets(buffer, sizeof(buffer), stdin);
+    buffer[strcspn(buffer, "\n")] = '\0';
+    int time_left = time(NULL) - start;
+
+    if (time_left > start_time){
+        puts("TIME'S OUT!");
+        sleep(2);
+        return 0;
+    }
+
+    if (strcmp(buffer, target_port.answer) != 0){
+        puts("WRONG ANSWER!");
+        sleep(2);
+        return 0;
+    }
+
+    puts("CORRECT ANSWER!");
+    sleep(2);
+    return 1;
 }
 
 microgame games[] = {
@@ -613,14 +655,14 @@ microgame games[] = {
     {microgame_memory, "REMEMBER THE SEQUENCE!"},
     {microgame_press, "PRESS THE CORRECT KEY OR KEYS!"},
     {microgame_escape, "ESCAPE THE LABYRINTH!"},
-    {microgame_not_press, "DO NOT PRESS ANYTHING!"},
+    {microgame_ports, "WRITE THE RIGHT PORT OR SERVICE!"}
 };
 
 //Este es el array que contiene toda la info sobre los microjuegos que hay
 
 
 int play_random_microgame(){ //Esta funcion selecciona un microjuego aleatorio y lo ejecuta
-    int index = rand() % 7; //rand() % 8; -> Este hay que descomentarlo cuando lo tenga los 8 microjuegos completados
+    int index = rand() % 8;
     microgame current_game = games[index];
     sleep(2);
     printf("%s\n", current_game.game_message);

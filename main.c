@@ -5,9 +5,6 @@
 #include "microgames.h"
 #include <SDL2/SDL_mixer.h>
 
-// NOTA: VOY A COMENTAR LA SECUENICA DE CARGA DEL JUEGO PARA DEBUGGEAR MÁS RÁPIDO
-// QUE NO SE ME OLVIDE DESCOMENTARLO UNA VEZ TERMINADO EL JUEGO
-
  void clean_screen(){ //Funcion para limpiar la pantalla
     printf("\033[H\033[J");
 }
@@ -84,7 +81,7 @@ int main(void){ //La funcion principal del programa
                 puts("- Author: WindWakerLink");
                 puts("- Game programmed entirely in C");
                 puts("- Total microgames: 8");
-                puts("- Completed microgames: 7");
+                puts("- Current version: 1.0");
                 puts("- Version 2.0 comming soon...");
                 puts("");
                 puts("/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/");
