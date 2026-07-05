@@ -1,5 +1,5 @@
 #ifndef MICROGAMES_H
-#define MICROGAMES_He
+#define MICROGAMES_H
 
 typedef struct{
     int (*run)(void);
@@ -12,38 +12,15 @@ typedef struct{
 } ping_class; //El struct para el microjuego del Ping
 
 typedef struct{
-    char current_directory[50];
-    char instruction[128];
-    char answer[64];
+    char module_1[256];
+    char module_2[256];
+    char module_3[256];
+    char *module_4[10];
+} microgame_class;
 
-} instruction_class; //Struct para el microjuego de las instruciones
-
-typedef struct{
-    char code_lines[256];
-    char line_error[8];
-} code_error_class; //Struct para el microjuego del error de código y el de encontrar achivos en una lista
-
-typedef struct{
-    char message[64];
-    char possible_targets[256];
-    char target[16];
-} find_class;
-
-typedef struct{
-    char sequence[256];
-    char answer[64];
-} memory_class;
-
-typedef struct{
-    char message[64];
-    char answer[16];
-} press_class;
-
-typedef struct{
-    char type[32];
-    char port_or_service[16];
-    char answer[16];
-} ports_class;
+/*He decidido crear la 'microgame class' para agrupar todas las clases que 
+ * tenía antes en una sola, con diferentes módulos para sustituir a las 
+ * diferentes cosas que había antes*/
 
 
 /* Y estas son las funciones que vamos a usar para main.c y microgames.c

@@ -7,6 +7,9 @@
 #define WIN 1
 #define LOSE 0
 
+
+
+
 static void clean_screen(){ 
     printf("\033[H\033[J");
 }
@@ -184,17 +187,17 @@ int microgame_instructions(){
     int start_time = 15;
     int start = time(NULL);
 
-    instruction_class instructions[] = {
-        {"You are in: /home/player", "Go to /home/player/Documents and list the content", "cd Documents && ls" },
-        {"You are in: /etc", "Find the line contaning \"root\" in the \"passwd\" file", "grep root passwd"},
-        {"You are in: /home/player/projects", "Go to /home/player/projects/https-server and execute the ELF \"main\"", "cd https-server && ./main"},
-        {"You are in: /home/player", "Create a file name \"notes.txt\" containing \"Hello World!\"", "touch notes.txt && echo \"Hello World!\" < notes.txt"},
-        {"You are in: /opt/tools", "Make \"installer.sh\" executable", "chmod +x installer.sh"},
-        {"You are in: /etc", "Search for \"localhost\" in all files", "grep -r localhost ."},
-        {"You are in: /var/log", "Count how many lines contain \"error\" in syslog", "grep -i error syslog | wc -l"},
-        {"You are in: /", "Find running processes related to nginx", "ps aux | grep nginx"},
-        {"You are in: /home/player/scrpts", "Make \"deploy.sh\" executable, then execute it and save output to \"log.txt\"", "chmod +x deploy.sh && ./deploy.sh > log.txt"},
-        {"You are in: /etc", "List files containing \"conf\" and save output to \"result.txt\"", "ls | grep conf > result.txt"}
+    microgame_class instructions[] = {
+        {"You are in: /home/player", "Go to /home/player/Documents and list the content", "cd Documents && ls", "daf", "ho"},
+        {"You are in: /etc", "Find the line contaning \"root\" in the \"passwd\" file", "grep root passwd", "saf", "ho"},
+        {"You are in: /home/player/projects", "Go to /home/player/projects/https-server and execute the ELF \"main\"", "cd https-server && ./main", " sdf", "si"},
+        {"You are in: /home/player", "Create a file name \"notes.txt\" containing \"Hello World!\"", "touch notes.txt && echo \"Hello World!\" < notes.txt", "si", "si"},
+        {"You are in: /opt/tools", "Make \"installer.sh\" executable", "chmod +x installer.sh", "sfsdf ", "si"},
+        {"You are in: /etc", "Search for \"localhost\" in all files", "grep -r localhost .", "sfsdf ", "si"},
+        {"You are in: /var/log", "Count how many lines contain \"error\" in syslog", "grep -i error syslog | wc -l", "sdfsf", "si"},
+        {"You are in: /", "Find running processes related to nginx", "ps aux | grep nginx", "sfsdf", "si"},
+        {"You are in: /home/player/scrpts", "Make \"deploy.sh\" executable, then execute it and save output to \"log.txt\"", "chmod +x deploy.sh && ./deploy.sh > log.txt", "dsfdf", "si"},
+        {"You are in: /etc", "List files containing \"conf\" and save output to \"result.txt\"", "ls | grep conf > result.txt", "sfsdfsdf", "si"}
 
     };
 
@@ -203,13 +206,13 @@ int microgame_instructions(){
 
     int rand_instruction = rand() % 10;
 
-    instruction_class target_instruction = instructions[rand_instruction];
+    microgame_class target_instruction = instructions[rand_instruction];
 
     clean_screen();
     printf("TIME: %d\n", start_time);
     puts("");
-    printf("%s\n", target_instruction.current_directory);
-    printf("OBJECTIVE: %s\n", target_instruction.instruction);
+    printf("%s\n", target_instruction.module_1);
+    printf("OBJECTIVE: %s\n", target_instruction.module_2);
     puts("NOTE: All instructions must be done using ONLY ONE command line");
     puts("");
     printf("player@linkware:~$ ");
@@ -224,7 +227,7 @@ int microgame_instructions(){
         return 0;
     }
 
-    if (strcmp(buffer, target_instruction.answer) != 0){
+    if (strcmp(buffer, target_instruction.module_2) != 0){
 
         puts("WRONG COMMAND!");
         sleep(2);
@@ -247,22 +250,22 @@ int microgame_code_error(){
     int start = time(NULL);
     
 
-    code_error_class code_errors[] = {
+    microgame_class code_errors[] = {
 
-        {"1 | int main(){\n2 |     int x = 5\n3 |     printf(\"%d\\n\", x);\n4 | }", "line 2"},
-        {"5 | int main(){\n6 |     year = 2026;\n7 |     printf(\"%d\\n\", year);\n8 | }", "line 6"},
-        {"1 | int x = 5;\n2 |\n3 | if (x = 5){\n4 |     printf(\"Five\\n\");\n5 | }", "line 3"},
-        {" 9 | int time = 12;\n10 | char buffer[64];\n11 | fgets(buffer, sizeof(buffer), stdin);\n12 | if (buffer == \"hello\"){\n13 |     printf(\"Hi there!\\n\");", "line 12"},
-        {"1 | int numbers[10];\n2 |\n3 | numbers[10] = 42;\n4 |", "line 3"},
-        {"23 | int main(){\n24 |     char username[8];\n25 |\n26 |     strcpy(username, \"SuperAdmin\");\n27 |\n28 |     printf(\"%s\\n\", username);\n29 |\n30 | return 0;\n31 | }", "line 26"},
-        {"1 | int main(){\n2 |     char *name = NULL;\n3 |\n4 |     puts(\"Loading...\");\n5 |     sleep(2);\n6 |\n7 |     printf(\"%c\\n\", name);\n8 |     return 0;\n9 | }", "line 7"} 
+        {"1 | int main(){\n2 |     int x = 5\n3 |     printf(\"%d\\n\", x);\n4 | }", "line 2", "si", "si"},
+        {"5 | int main(){\n6 |     year = 2026;\n7 |     printf(\"%d\\n\", year);\n8 | }", "line 6", "si", "si"},
+        {"1 | int x = 5;\n2 |\n3 | if (x = 5){\n4 |     printf(\"Five\\n\");\n5 | }", "line 3", "si", "si"},
+        {" 9 | int time = 12;\n10 | char buffer[64];\n11 | fgets(buffer, sizeof(buffer), stdin);\n12 | if (buffer == \"hello\"){\n13 |     printf(\"Hi there!\\n\");", "line 12", "si", "si"},
+        {"1 | int numbers[10];\n2 |\n3 | numbers[10] = 42;\n4 |", "line 3", "si", "si"},
+        {"23 | int main(){\n24 |     char username[8];\n25 |\n26 |     strcpy(username, \"SuperAdmin\");\n27 |\n28 |     printf(\"%s\\n\", username);\n29 |\n30 | return 0;\n31 | }", "line 26", "si", "si"},
+        {"1 | int main(){\n2 |     char *name = NULL;\n3 |\n4 |     puts(\"Loading...\");\n5 |     sleep(2);\n6 |\n7 |     printf(\"%c\\n\", name);\n8 |     return 0;\n9 | }", "line 7", "si", "si"} 
 
     };
 
     // Bueno, aquí no tengo que explicar nada porque es lo mismo qeu los otros 2 microjuegos
     int rand_code_error = rand() % 7;
 
-    code_error_class target_code_error = code_errors[rand_code_error];
+    microgame_class target_code_error = code_errors[rand_code_error];
 
     clean_screen();
     printf("TIME: %d\n", start_time);
@@ -271,7 +274,7 @@ int microgame_code_error(){
     puts("Write \"line\" followed by the line number where the error is!");
     puts("Example: line 33");
     puts("");
-    printf("%s", target_code_error.code_lines);
+    printf("%s", target_code_error.module_1);
     puts("");
     puts("");
     printf("player@linkware:~$ ");
@@ -287,7 +290,7 @@ int microgame_code_error(){
         return 0;
     }
 
-    if (strcmp(buffer, target_code_error.line_error) != 0){
+    if (strcmp(buffer, target_code_error.module_2) != 0){
         
         puts("YOU DIDN'T THE ERROR!");
         sleep(2);
@@ -307,13 +310,13 @@ int microgame_find(){
     int start_time = 10;
     int start = time(NULL);
 
-    find_class find_cases[] = {
-        {"Find the oldest edited file in the group!", "-rw-r--r-- 1 player player  470 May 13 19:00 README.md\n-rw-r--r-- 1 player player 1534 May 13 18:45 text.txt", "text.txt"},
-        {"Find the shell script!", "arch-linux.iso calculator.py game.cpp hello.txt shell.sh", "shell.sh"},
-        {"Find the private IP!", "1) 8.8.8.8\n2) 151.101.1.67\n3) 192.168.1.134\n4) 89.234.21.7", "3"},
-        {"Find the loopback IP!", "1) 191.34.233.40\n2) 10.0.0.1\n3) 172.182.99.3\n4) 127.0.0.1", "4"},
-        {"Find the hidden file!", "notes.txt config.cfg .bashrc picture.jpg", ".bashrc"},
-        {"Find the suspicious file!", "ball.png debian-13.iso fantasy-book.pdf keylogger.py roblox-script.lua", "keylogger.py"}
+    microgame_class find_cases[] = {
+        {"Find the oldest edited file in the group!", "-rw-r--r-- 1 player player  470 May 13 19:00 README.md\n-rw-r--r-- 1 player player 1534 May 13 18:45 text.txt", "text.txt", "si", "si"},
+        {"Find the shell script!", "arch-linux.iso calculator.py game.cpp hello.txt shell.sh", "shell.sh", "si", "si"},
+        {"Find the private IP!", "1) 8.8.8.8\n2) 151.101.1.67\n3) 192.168.1.134\n4) 89.234.21.7", "3", "si", "si"},
+        {"Find the loopback IP!", "1) 191.34.233.40\n2) 10.0.0.1\n3) 172.182.99.3\n4) 127.0.0.1", "4", "si", "si"},
+        {"Find the hidden file!", "notes.txt config.cfg .bashrc picture.jpg", ".bashrc", "si", "si"},
+        {"Find the suspicious file!", "ball.png debian-13.iso fantasy-book.pdf keylogger.py roblox-script.lua", "keylogger.py", "si", "si"}
 
 
         //Me he cansdo de explicar esta parte de arriba
@@ -321,16 +324,16 @@ int microgame_find(){
     };
 
     int random_target = rand() % 6;
-    find_class find_target = find_cases[random_target];
+    microgame_class find_target = find_cases[random_target];
 
     clean_screen();
     printf("TIME: %d\n", start_time);
     puts("");
-    printf("OBJECTIVE: %s\n", find_target.message);
+    printf("OBJECTIVE: %s\n", find_target.module_1);
     puts("");
     puts("NOTE: This is what you should write depending of the target:\n-File/dir: write the file/dir name\n-IP: write the number before the IP address");
     puts("");
-    printf("%s\n", find_target.possible_targets);
+    printf("%s\n", find_target.module_2);
     puts("");
     puts("");
     printf("player@linkware:~$ ");
@@ -345,7 +348,7 @@ int microgame_find(){
         return 0;
     }
 
-    if (strcmp(buffer, find_target.target) != 0){
+    if (strcmp(buffer, find_target.module_3) != 0){
         puts("YOU DIDN'T FOUND THE TARGET!");
         sleep(2);
         return 0;
@@ -364,23 +367,23 @@ int microgame_memory(){
     int start_time = 10;
     
 
-    memory_class sequences[] = {
-        {"3) malloc\n1) pointer\n2) array\n4) struct" , "pointer array malloc struct"},
-        {"1) linux\n2) kernel\n3) bash ", "linux kernel bash"},
-        {"4) kotlin\n2) python\n3) java\n1) rust", "rust python java kotlin"},
-        {"2) ls\n3) man\n5) grep\n1) mkdir\n4) sudo", "mkdir ls man sudo grep"},
-        {"2) /usr\n1) /tmp\n3) /home\n4) /mnt", "/tmp /usr /home /mnt"}
+    microgame_class sequences[] = {
+        {"3) malloc\n1) pointer\n2) array\n4) struct" , "pointer array malloc struct", "si", "si"},
+        {"1) linux\n2) kernel\n3) bash ", "linux kernel bash", "si", "si"},
+        {"4) kotlin\n2) python\n3) java\n1) rust", "rust python java kotlin", "si", "si"},
+        {"2) ls\n3) man\n5) grep\n1) mkdir\n4) sudo", "mkdir ls man sudo grep", "si", "si"},
+        {"2) /usr\n1) /tmp\n3) /home\n4) /mnt", "/tmp /usr /home /mnt", "si", "si"}
 
     };
 
     int random_sequence = rand() % 5;
 
-    memory_class target_sequence = sequences[random_sequence];
+    microgame_class target_sequence = sequences[random_sequence];
 
     clean_screen();
     puts("YOU HAVE THREE SECONDS TO MEMORIZE THIS SEQUENCE!");
     puts("");
-    printf("%s", target_sequence.sequence);
+    printf("%s", target_sequence.module_1);
     fflush(stdout);
     sleep(3);
     clean_screen();
@@ -402,7 +405,7 @@ int microgame_memory(){
         return 0;
     }
 
-    if (strcmp(buffer, target_sequence.answer) != 0){
+    if (strcmp(buffer, target_sequence.module_2) != 0){
         puts("WRONG ANSWER!");
         sleep(2);
         return 0;
@@ -421,25 +424,25 @@ int microgame_press(){
     int start_time = 7;
     int start = time(NULL);
 
-    press_class cases[] = {
-        {"PRESS A FIVE TIMES", "aaaaa"},
-        {"PRESS H 1 TIME AND J 3 TIMES", "hjjj"},
-        {"PRESS / 2 TIMES, D FOR 2 TIMES AND P FOR 1 TIME", "//ddp"},
-        {"PRESS Z 3 TIMES", "zzz"},
-        {"PRESS ; 4 times and R 2 times", ";;;;rr"},
-        {"PRESS G 3 TIMES, Y 2 TIMES AND V 1 TIME", "gggyyv"},
-        {"PRESS @", "@"},
-        {"PRESS 6 6 TIMES AND 7 7 TIMES", "6666667777777"},
+    microgame_class cases[] = {
+        {"PRESS A FIVE TIMES", "aaaaa", "si", "si"},
+        {"PRESS H 1 TIME AND J 3 TIMES", "hjjj", "si", "si"},
+        {"PRESS / 2 TIMES, D FOR 2 TIMES AND P FOR 1 TIME", "//ddp", "si", "si"},
+        {"PRESS Z 3 TIMES", "zzz", "si", "si"},
+        {"PRESS ; 4 times and R 2 times", ";;;;rr", "si", "si"},
+        {"PRESS G 3 TIMES, Y 2 TIMES AND V 1 TIME", "gggyyv", "si", "si"},
+        {"PRESS @", "@", "si", "si"},
+        {"PRESS 6 6 TIMES AND 7 7 TIMES", "6666667777777", "si", "si"},
     };
 
     int random_case = rand() % 8;
-    press_class objective_press = cases[random_case];
+    microgame_class objective_press = cases[random_case];
 
     clean_screen();
     printf("TIME: %d", start_time);
     puts("");
     puts("");
-    printf("%s\n", objective_press.message);
+    printf("%s\n", objective_press.module_1);
     puts("NOTE: you must press all the keys in lowercase and without spaces!");
     puts("Once you're done pressing the keys, hit ENTER");
     puts("");
@@ -454,7 +457,7 @@ int microgame_press(){
         return 0;
     }
 
-    if (strcmp(buffer, objective_press.answer) != 0){
+    if (strcmp(buffer, objective_press.module_2) != 0){
         puts("WRONG ANSWER!");
         sleep(2);
         return 0;
@@ -605,25 +608,25 @@ int microgame_ports(){
     int start_time = 10;
     int start = time(NULL);
 
-    ports_class ports[] = {
-        {"Port: ", "80", "http"},
-        {"Service: ", "HTTPS", "443"},
-        {"Port: ", "143", "imap"},
-        {"Service: ", "DHCP", "67"},
-        {"Port: ", "53", "dns"},
-        {"Service: ", "FTP", "21"},
-        {"Port: ", "22", "ssh"},
+    microgame_class ports[] = {
+        {"Port: ", "80", "http", "si"},
+        {"Service: ", "HTTPS", "443", "si"},
+        {"Port: ", "143", "imap", "si"},
+        {"Service: ", "DHCP", "67", "si"},
+        {"Port: ", "53", "dns", "si"},
+        {"Service: ", "FTP", "21", "si"},
+        {"Port: ", "22", "ssh", "si"},
     };
 
     int random_port = rand() % 7;
-    ports_class target_port = ports[random_port];
+    microgame_class target_port = ports[random_port];
 
     clean_screen();
     printf("TIME: %d\n",  start_time);
     puts("");
     puts("Write the port or service (in lowercase)!");
     puts("");
-    printf("%s%s", target_port.type, target_port.port_or_service);
+    printf("%s%s", target_port.module_1, target_port.module_2);
     puts("");
     puts("");
     printf("player@linkware:~$ ");
@@ -637,7 +640,7 @@ int microgame_ports(){
         return 0;
     }
 
-    if (strcmp(buffer, target_port.answer) != 0){
+    if (strcmp(buffer, target_port.module_3) != 0){
         puts("WRONG ANSWER!");
         sleep(2);
         return 0;
