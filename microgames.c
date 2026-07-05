@@ -501,7 +501,8 @@ int microgame_escape(){
         }
         puts("");
         puts("");
-        puts("GO TO THE EXIT");
+        puts("GO TO THE EXIT!");
+        puts("P -> Player, E -> exit");
         puts("CONTROLS: w -> up, a -> left, s -> down, d -> right");
         puts("You must put the direction you want to move, then hit ENTER to move");
         puts("");
