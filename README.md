@@ -21,5 +21,4 @@ microgame
 ### NOTES: 
 - All the comments in the code are in Spanish (that's kinda obvious)
 - This proyect was meant to be Linux-only (but you can use it on Windows or Mac rn)
-- I may have some repetated code and all that, but I wanted at least one functional version of the game
-(right now I'm working on debugging the code and making it more compact)
+- As I said earlier, right now I'm working on debugging the code and making it more compact and structured
