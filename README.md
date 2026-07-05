@@ -13,9 +13,10 @@ microgame
 
 ## WHAT WILL VERSION 2.0 INCLUDE?
 
-- Music for the menu, game and microgames
+- Music for the menu, microgames and the microgame itself
 - Some microgames might receive upgrades
-- Maybe 2 or 3 more microgames 
+- Maybe 2 or 3 more microgames
+- More clean, structured code
 
 ### NOTES: 
 - All the comments in the code are in Spanish (that's kinda obvious)
