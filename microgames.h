@@ -7,11 +7,6 @@ typedef struct{
 } microgame; //Aquí tenemos el struct que define a un microjuego
 
 typedef struct{
-    char message[50];
-    char *array[10];
-} ping_class; //El struct para el microjuego del Ping
-
-typedef struct{
     char module_1[256];
     char module_2[256];
     char module_3[256];

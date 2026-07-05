@@ -8,20 +8,31 @@
 #define LOSE 0
 
 
+int microgame_win_con(int TL, int ST, char buff[] , char module[] , char *message_1, char *message_2){ // TL -> time left, ST -> start time 
 
+        if (TL > ST){
+        puts("TIME'S OUT!");
+        sleep(2);
+        return 0;
+    }
+
+    if (strcmp(buff, module) != 0){
+
+        printf("%s\n", message_1);
+        sleep(2);
+        return 0;
+    } 
+    
+    printf("%s\n", message_2);
+    sleep(2);
+    return 1;
+}
 
 static void clean_screen(){ 
     printf("\033[H\033[J");
 }
 
-/* TODO: voy a cambiar la selección de juego aletorio temporalmente para que solamente se elija
-el microjuego en el que estoy trabajando
-
-    TODO: termninar el microjuego del laberinto
-    TODO: recordar poner comentarios en todo lo que hago para no perderme
-    NOTA: ya he terminado de hacer 6 de los 8 microjuegos (VENGA, ME QUEDA POCO :) ) 
-
-*/
+/* TODO: Nada que hacer de momento*/
 
 //debajo están las funciones de cada microjuego
 
@@ -31,10 +42,10 @@ int microgame_ping(){
     int start_time = 10;
     int start = time(NULL);
 
-    ping_class classes[] = {
-        {"PING THE CLASS A IP!", {"10.212.6.1", "8.8.8.8", "10.0.0.1", "12.34.56.78", "25.3.0.67", "60.18.44.182", "99.27.224.79", "3.14.56.92", "126.8.22.44", "59.9.34.252"}},
-        {"PING THE CLASS B IP!", {"128.33.8.91", "173.9.37.154", "166.66.33.22", "132.87.0.2", "158.28.1.248", "191.0.0.4", "146.3.0.5", "181.30.73.29", "174.91.33.8", "132.182.83.74"}},
-        {"PING THE CLASS C IP!", {"192.168.0.122", "207.22.33.99", "193.28.67.34", "212.22.3.8", "194.34.3.4", "221.30.20.70", "209.3.212.87", "198.76.54.32", "217.94.31.26", "192.73.8.14"}}
+    microgame_class classes[] = {
+        {"PING THE CLASS A IP!", "si", "si", {"10.212.6.1", "8.8.8.8", "10.0.0.1", "12.34.56.78", "25.3.0.67", "60.18.44.182", "99.27.224.79", "3.14.56.92", "126.8.22.44", "59.9.34.252"}},
+        {"PING THE CLASS B IP!", "si", "si", {"128.33.8.91", "173.9.37.154", "166.66.33.22", "132.87.0.2", "158.28.1.248", "191.0.0.4", "146.3.0.5", "181.30.73.29", "174.91.33.8", "132.182.83.74"}},
+        {"PING THE CLASS C IP!", "si", "si",  {"192.168.0.122", "207.22.33.99", "193.28.67.34", "212.22.3.8", "194.34.3.4", "221.30.20.70", "209.3.212.87", "198.76.54.32", "217.94.31.26", "192.73.8.14"}}
     }; /* Aquí están las clases de IPs de la A a la C con sus IPs, junto 
     con un buffer y el tiempo que tiene el microjuego*/
 
@@ -42,8 +53,8 @@ int microgame_ping(){
     int random_ip = rand() % 10;
     int random_distraction_ip = rand() % 10;
     int random_distraction_ip2 = rand() % 10;
-    ping_class objective_class = classes[class];
-    ping_class distraction_class, distraction_class2;
+    microgame_class objective_class = classes[class];
+    microgame_class distraction_class, distraction_class2;
 
     //Arriba elegimos una clase e IP random y las IPs de distracción y eso
 
@@ -66,7 +77,7 @@ int microgame_ping(){
     /* Arriba declaramos que si la IP es de un tipo, las 2 IPs restantes tienen que ser de otro tipo*/
     
     
-    char *ip_list[] = {objective_class.array[random_ip], distraction_class.array[random_distraction_ip], distraction_class2.array[random_distraction_ip2]};
+    char *ip_list[] = {objective_class.module_4[random_ip], distraction_class.module_4[random_distraction_ip], distraction_class2.module_4[random_distraction_ip2]};
 
     for (int i = 0, j = 0; i <= 2; i++){
         j = rand() % 3;
@@ -83,7 +94,7 @@ int microgame_ping(){
     
     printf("TIME: %d\n", start_time);
     puts("");
-    printf("%s\n", objective_class.message);
+    printf("%s\n", objective_class.module_1);
     puts("Use 'ping' followed by the number of the IP!");
     puts("Example: ping 8");
     printf("\n");
@@ -107,21 +118,21 @@ int microgame_ping(){
         return 0;
     }
 
-    if ((strcmp(buffer, "ping 1") == 0 && strcmp(ip_list[0], objective_class.array[random_ip]) == 0) ||
-    (strcmp(buffer, "ping 2") == 0 && strcmp(ip_list[1], objective_class.array[random_ip]) == 0) ||
-    (strcmp(buffer, "ping 3") == 0 && strcmp(ip_list[2], objective_class.array[random_ip]) == 0)){
+    if ((strcmp(buffer, "ping 1") == 0 && strcmp(ip_list[0], objective_class.module_4[random_ip]) == 0) ||
+    (strcmp(buffer, "ping 2") == 0 && strcmp(ip_list[1], objective_class.module_4[random_ip]) == 0) ||
+    (strcmp(buffer, "ping 3") == 0 && strcmp(ip_list[2], objective_class.module_4[random_ip]) == 0)){
 
-    printf("PING %s (%s) 56(84) bytes of data.\n", objective_class.array[random_ip], objective_class.array[random_ip]);
-    printf("64 bytes from %s: icmp_seq=1 ttl=116 time=9.18 ms\n", objective_class.array[random_ip]);
+    printf("PING %s (%s) 56(84) bytes of data.\n", objective_class.module_4[random_ip], objective_class.module_4[random_ip]);
+    printf("64 bytes from %s: icmp_seq=1 ttl=116 time=9.18 ms\n", objective_class.module_4[random_ip]);
     sleep(1);
-    printf("64 bytes from %s: icmp_seq=1 ttl=116 time=8.63 ms\n", objective_class.array[random_ip]);
+    printf("64 bytes from %s: icmp_seq=1 ttl=116 time=8.63 ms\n", objective_class.module_4[random_ip]);
     sleep(1);
-    printf("64 bytes from %s: icmp_seq=1 ttl=116 time=8.82 ms\n", objective_class.array[random_ip]);
+    printf("64 bytes from %s: icmp_seq=1 ttl=116 time=8.82 ms\n", objective_class.module_4[random_ip]);
     sleep(1);
-    printf("64 bytes from %s: icmp_seq=1 ttl=116 time=8.67 ms\n", objective_class.array[random_ip]);
+    printf("64 bytes from %s: icmp_seq=1 ttl=116 time=8.67 ms\n", objective_class.module_4[random_ip]);
     sleep(1);
     puts("^C");
-    printf("--- %s ping statistics ---\n", objective_class.array[random_ip]);
+    printf("--- %s ping statistics ---\n", objective_class.module_4[random_ip]);
     puts("4 packets transmitted, 4 received, 0% packet loss, time 3005ms");
     puts("rtt min/avg/max/mdev = 8.429./8.571/8.721/0.122 ms");
     printf("player@linkware:~$ \n");
@@ -130,7 +141,7 @@ int microgame_ping(){
     return 1;
     }
 
-    else if (strcmp(buffer, "ping 1") == 0 && strcmp(ip_list[0], objective_class.array[random_ip]) != 0){
+    else if (strcmp(buffer, "ping 1") == 0 && strcmp(ip_list[0], objective_class.module_4[random_ip]) != 0){
         printf("PING %s (%s) 56(84) bytes of data.\n", ip_list[0], ip_list[0]);
         sleep(4);
         puts("^C");
@@ -142,7 +153,7 @@ int microgame_ping(){
         return 0;
     }
 
-    else if (strcmp(buffer, "ping 2") == 0 && strcmp(ip_list[1], objective_class.array[random_ip]) != 0){
+    else if (strcmp(buffer, "ping 2") == 0 && strcmp(ip_list[1], objective_class.module_4[random_ip]) != 0){
         printf("PING %s (%s) 56(84) bytes of data.\n", ip_list[1], ip_list[1]);
         sleep(4);
         puts("^C");
@@ -154,7 +165,7 @@ int microgame_ping(){
         return 0;
     }
 
-    else if (strcmp(buffer, "ping 3") == 0 && strcmp(ip_list[2], objective_class.array[random_ip]) != 0){
+    else if (strcmp(buffer, "ping 3") == 0 && strcmp(ip_list[2], objective_class.module_4[random_ip]) != 0){
         printf("PING %s (%s) 56(84) bytes of data.\n", ip_list[2], ip_list[2]);
         sleep(4);
         puts("^C");
@@ -176,9 +187,7 @@ int microgame_ping(){
     /* Voy a explicar los IFs de arriba: el primero comprueba si alguno de los pings (ping 1, ping 2...), coincide
     con la IP que se busca y si es así se hace un ping como si fuera un ping de verdad. Los 3 bucles siguientes comprueban si cada ping
     no coincide con la IP que se busca, y el último es cuando se pone otra cosa que no es "ping 1-2-3 "*/
-
-    
-    
+ 
 }
 
 int microgame_instructions(){
@@ -205,7 +214,6 @@ int microgame_instructions(){
     la respuesta correcta a esa instrucción*/
 
     int rand_instruction = rand() % 10;
-
     microgame_class target_instruction = instructions[rand_instruction];
 
     clean_screen();
@@ -220,28 +228,13 @@ int microgame_instructions(){
     buffer[strcspn(buffer, "\n")] = '\0';
     fflush(stdout);
     int time_left = time(NULL) - start;
+    int result = microgame_win_con(time_left, start_time, buffer, target_instruction.module_3, "WRONG COMMAND!", "CORRECT COMMAND!");
+    return result;
+}
 
-    if (time_left > start_time){
-        puts("TIME'S OUT!");
-        sleep(2);
-        return 0;
-    }
-
-    if (strcmp(buffer, target_instruction.module_2) != 0){
-
-        puts("WRONG COMMAND!");
-        sleep(2);
-        return 0;
-    } 
-    
-    puts("CORRECT COMMAND!");
-    sleep(2);
-    return 1;
-    
     /*Esto de arriba ya se ha visto antes: se imprime el tiempo, el directorio en el que supuestamente estás,
     la instrucción a seguir, una nota para indicar que todos los comandos hay que hacerlos en una sola línea
     y ya se espera la respuesta del jugador y se comprueba si la respuesta es o no correcta*/    
-}
 
 int microgame_code_error(){
 
@@ -264,7 +257,6 @@ int microgame_code_error(){
 
     // Bueno, aquí no tengo que explicar nada porque es lo mismo qeu los otros 2 microjuegos
     int rand_code_error = rand() % 7;
-
     microgame_class target_code_error = code_errors[rand_code_error];
 
     clean_screen();
@@ -282,28 +274,13 @@ int microgame_code_error(){
     buffer[strcspn(buffer, "\n")] = '\0';
     fflush(stdout);
     int time_left = time(NULL) - start;
-    
-
-    if (time_left > start_time){
-        puts("TIME'S OUT!");
-        sleep(2);
-        return 0;
-    }
-
-    if (strcmp(buffer, target_code_error.module_2) != 0){
-        
-        puts("YOU DIDN'T THE ERROR!");
-        sleep(2);
-        return 0;
-    }
-
-    puts("YOU FOUND THE ERROR!");
-    sleep(2);
-    return 1;
+    int result = microgame_win_con(time_left, start_time, buffer, target_code_error.module_2, "YOU DIDN'T FIND THE ERROR!", "YOU FOUND THE ERROR!");
+    return result;
+}
 
     //Y esta parte del código es prácticamente igual a los otros microjuegos 
 
-}
+
 
 int microgame_find(){
     char buffer[64];
@@ -341,25 +318,8 @@ int microgame_find(){
     buffer[strcspn(buffer, "\n")] = '\0';
     fflush(stdout);
     int time_left = time(NULL) - start;
-
-    if (time_left > start_time){
-        puts("TIME'S OUT!");
-        sleep(2);
-        return 0;
-    }
-
-    if (strcmp(buffer, find_target.module_3) != 0){
-        puts("YOU DIDN'T FOUND THE TARGET!");
-        sleep(2);
-        return 0;
-    }
-
-    puts("YOU FOUND THE TARGET!");
-    sleep(2);
-    return 1;
- 
-    //Y también me he cansado de explicar lo que hace esta otra parte de arriba
-
+    int result = microgame_win_con(time_left, start_time, buffer, find_target.module_3, "YOU DIDN'T FIND THE TARGET!", "YOU FOUND THE TARGET!");
+    return result;
 }
 int microgame_memory(){
 
@@ -377,7 +337,6 @@ int microgame_memory(){
     };
 
     int random_sequence = rand() % 5;
-
     microgame_class target_sequence = sequences[random_sequence];
 
     clean_screen();
@@ -398,22 +357,8 @@ int microgame_memory(){
     buffer[strcspn(buffer, "\n")] = '\0';
     fflush(stdout);
     int time_left = time(NULL) - start;
-
-    if (time_left > start_time){
-        puts("TIME'S OUT!");
-        sleep(2);
-        return 0;
-    }
-
-    if (strcmp(buffer, target_sequence.module_2) != 0){
-        puts("WRONG ANSWER!");
-        sleep(2);
-        return 0;
-    }
-
-    puts("CORRECT ANSWER!");
-    sleep(2);
-    return 1;
+    int result = microgame_win_con(time_left, start_time, buffer, target_sequence.module_2, "WRONG ANSWER!", "CORRECT ANSWER!");
+    return result;
 }
 
 
@@ -450,22 +395,20 @@ int microgame_press(){
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
     int time_left = time(NULL) - start;
+    int result = microgame_win_con(time_left, start_time, buffer, objective_press.module_2, "WRONG ANSWER!", "CORRECT ANSWER!");
+    return result;
+     
+}
 
-    if (time_left > start_time){
-        puts("TIME'S OUT!");
-        sleep(2);
-        return 0;
-    }
-
-    if (strcmp(buffer, objective_press.module_2) != 0){
-        puts("WRONG ANSWER!");
-        sleep(2);
-        return 0;
-    }
-
-    puts("CORRECT ANSWER!");
-    sleep(2);
-    return 1;
+void print_instructions(){
+        puts("");
+        puts("");
+        puts("GO TO THE EXIT!");
+        puts("P -> Player, E -> Exit");
+        puts("CONTROLS: w -> up, a -> left, s -> down, d -> right");
+        puts("You must put the direction you want to move, then hit ENTER to move");
+        puts("");
+        printf("player@linkware:~$ ");
 }
 
 
@@ -502,14 +445,7 @@ int microgame_escape(){
             puts("");
             
         }
-        puts("");
-        puts("");
-        puts("GO TO THE EXIT!");
-        puts("P -> Player, E -> exit");
-        puts("CONTROLS: w -> up, a -> left, s -> down, d -> right");
-        puts("You must put the direction you want to move, then hit ENTER to move");
-        puts("");
-        printf("player@linkware:~$ ");
+        print_instructions();
         fgets(buffer, sizeof(buffer), stdin);
         buffer[strcspn(buffer, "\n")] = '\0';
         fflush(stdout);
@@ -589,13 +525,7 @@ int microgame_escape(){
         puts("");
         
     }
-    puts("");
-    puts("");
-    puts("GO TO THE EXIT");
-    puts("CONTROLS: w -> up, a -> left, s -> down, d -> right");
-    puts("You must put the direction you want to move, then hit ENTER to move");
-    puts("");
-    printf("player@linkware:~$ ");
+    print_instructions();
     puts("");
     puts("YOU FOUND THE EXIT!");
     sleep(2);
@@ -633,22 +563,9 @@ int microgame_ports(){
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
     int time_left = time(NULL) - start;
+    int result = microgame_win_con(time_left, start_time, buffer, target_port.module_3, "WRONG ANSWER!", "CORRECT ANSWER!");
+    return result;
 
-    if (time_left > start_time){
-        puts("TIME'S OUT!");
-        sleep(2);
-        return 0;
-    }
-
-    if (strcmp(buffer, target_port.module_3) != 0){
-        puts("WRONG ANSWER!");
-        sleep(2);
-        return 0;
-    }
-
-    puts("CORRECT ANSWER!");
-    sleep(2);
-    return 1;
 }
 
 microgame games[] = {
