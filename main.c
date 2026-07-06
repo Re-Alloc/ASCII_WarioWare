@@ -31,11 +31,11 @@
 void print_logo(void){
     puts("=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=");
     puts("");
-    puts(" ▄        ▀           █     ▄     ▄                     ");
-    puts(" █      ▄▄▄    ▄ ▄▄   █   ▄ █  █  █  ▄▄▄    ▄ ▄▄   ▄▄▄  ");
-    puts(" █        █    █▀  █  █ ▄▀  ▀ █▀█ █ ▀   █   █▀  ▀ █▀  █ ");
-    puts(" █        █    █   █  █▀█    ██ ██▀ ▄▀▀▀█   █     █▀▀▀▀ ");
-    puts(" █▄▄▄▄▄ ▄▄█▄▄  █   █  █  ▀▄  █   █  ▀▄▄▀█   █     ▀█▄▄▀ ");
+    puts(" ▄▄▄▄▄               ▄     ▄                     ");
+    puts(" █   ▀█  ▄▄▄         █  █  █  ▄▄▄    ▄ ▄▄   ▄▄▄  ");
+    puts(" █▄▄▄▄▀ █▀  █    █   ▀ █▀█ █ ▀   █   █▀  ▀ █▀  █ ");
+    puts(" █   ▀▄ █▀▀▀▀         ██ ██▀ ▄▀▀▀█   █     █▀▀▀▀ ");
+    puts(" █    ▀ ▀█▄▄▀    █    █   █  ▀▄▄▀█   █     ▀█▄▄▀ ");
     puts("");
     puts(" ▙▗▌▗                           ▗▀▖                                          ▐ ");
     puts(" ▌▘▌▄ ▞▀▖▙▀▖▞▀▖▞▀▌▝▀▖▛▚▀▖▞▀▖▞▀▘ ▐  ▞▀▖▙▀▖ ▛▀▖▙▀▖▞▀▖▞▀▌▙▀▖▝▀▖▛▚▀▖▛▚▀▖▞▀▖▙▀▖▞▀▘▐ ");
@@ -78,7 +78,7 @@ int main(void){ //La funcion principal del programa
                 puts("/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/");
                 puts("");
                 puts("- LinkWare | A WarioWare-style ASCII Game");
-                puts("- Author: WindWakerLink");
+                puts("- Author: Re-Alloc");
                 puts("- Game programmed entirely in C");
                 puts("- Total microgames: 8");
                 puts("- Current version: 1.0");
