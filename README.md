@@ -7,7 +7,7 @@ WarioWare and I decided to make the game just because
 
 - An ASCII menu with logos where you can play the game, see the credits of the project and exit the game
 - A total of 8 unique ASCII microgames (7 of them related to the programming field) with terminal-like
-inteface
+interface
 - Every microgame has instructions for how to play it and the amount of time you have to complete the
 microgame
 
