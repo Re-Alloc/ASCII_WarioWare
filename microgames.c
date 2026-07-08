@@ -102,7 +102,7 @@ int microgame_ping(){
     printf("2) %s\n", ip_list[1]);
     printf("3) %s\n", ip_list[2]);
     puts("");
-    printf("player@linkware:~$ ");
+    printf("player@re-ware:~$ ");
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
     fflush(stdout);
@@ -135,7 +135,7 @@ int microgame_ping(){
     printf("--- %s ping statistics ---\n", objective_class.module_4[random_ip]);
     puts("4 packets transmitted, 4 received, 0% packet loss, time 3005ms");
     puts("rtt min/avg/max/mdev = 8.429./8.571/8.721/0.122 ms");
-    printf("player@linkware:~$ \n");
+    printf("player@re-ware:~$ \n");
     sleep(2);
 
     return 1;
@@ -148,7 +148,7 @@ int microgame_ping(){
         printf("--- %s ping statistics ---\n", ip_list[0]);
         puts("4 packets transmitted, 0 received, 100% packet loss, time 4250ms");
         puts("");
-        printf("player@linkware:~$ \n");
+        printf("player@re-ware:~$ \n");
         sleep(2);
         return 0;
     }
@@ -160,7 +160,7 @@ int microgame_ping(){
         printf("--- %s ping statistics ---\n", ip_list[1]);
         puts("4 packets transmitted, 0 received, 100% packet loss, time 4250ms");
         puts("");
-        printf("player@linkware:~$ \n");
+        printf("player@re-ware:~$ \n");
         sleep(2);
         return 0;
     }
@@ -172,14 +172,14 @@ int microgame_ping(){
         printf("--- %s ping statistics ---\n", ip_list[2]);
         puts("4 packets transmitted, 0 received, 100% packet loss, time 4250ms");
         puts("");
-        printf("player@linkware:~$ \n");
+        printf("player@re-ware:~$ \n");
         sleep(2);
         return 0;
     }
 
     else {
         printf("bash: $%s: command not found\n", buffer);
-        printf("player@linkware-$ \n");
+        printf("player@re-ware-$ \n");
         sleep(2);
         return 0;
     }
@@ -223,7 +223,7 @@ int microgame_instructions(){
     printf("OBJECTIVE: %s\n", target_instruction.module_2);
     puts("NOTE: All instructions must be done using ONLY ONE command line");
     puts("");
-    printf("player@linkware:~$ ");
+    printf("player@re-ware:~$ ");
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
     fflush(stdout);
@@ -269,7 +269,7 @@ int microgame_code_error(){
     printf("%s", target_code_error.module_1);
     puts("");
     puts("");
-    printf("player@linkware:~$ ");
+    printf("player@re-ware:~$ ");
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
     fflush(stdout);
@@ -313,7 +313,7 @@ int microgame_find(){
     printf("%s\n", find_target.module_2);
     puts("");
     puts("");
-    printf("player@linkware:~$ ");
+    printf("player@re-ware:~$ ");
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
     fflush(stdout);
@@ -352,7 +352,7 @@ int microgame_memory(){
     puts("");
     puts("You must write all the words in order, in lowercase and separated with a space!");
     puts("");
-    printf("player@linkware:~$ ");
+    printf("player@re-ware:~$ ");
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
     fflush(stdout);
@@ -391,7 +391,7 @@ int microgame_press(){
     puts("NOTE: you must press all the keys in lowercase and without spaces!");
     puts("Once you're done pressing the keys, hit ENTER");
     puts("");
-    printf("player@linkware:~$ ");
+    printf("player@re-ware:~$ ");
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
     int time_left = time(NULL) - start;
@@ -408,7 +408,7 @@ void print_instructions(){
         puts("CONTROLS: w -> up, a -> left, s -> down, d -> right");
         puts("You must put the direction you want to move, then hit ENTER to move");
         puts("");
-        printf("player@linkware:~$ ");
+        printf("player@re-ware:~$ ");
 }
 
 
@@ -427,10 +427,7 @@ int microgame_escape(){
     int win_con = 0; // -> condición de victoria
     char buffer[64];
     char matrix[5][8] = {"#######", "#P # E#", "#  #  #",  "#     #", "#######" };
-    
-    //La posición en este caso del jugador es matrix[1][0][1]
-    
-   
+       
     int row = 1;
     int index = 1;
     int start_time = 10;
@@ -559,7 +556,7 @@ int microgame_ports(){
     printf("%s%s", target_port.module_1, target_port.module_2);
     puts("");
     puts("");
-    printf("player@linkware:~$ ");
+    printf("player@re-ware:~$ ");
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
     int time_left = time(NULL) - start;
