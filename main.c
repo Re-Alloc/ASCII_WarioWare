@@ -77,7 +77,7 @@ int main(void){ //La funcion principal del programa
                 fflush(stdout);
                 puts("/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/");
                 puts("");
-                puts("- LinkWare | A WarioWare-style ASCII Game");
+                puts("- Re:Ware | A WarioWare-style ASCII Game");
                 puts("- Author: Re-Alloc");
                 puts("- Game programmed entirely in C");
                 puts("- Total microgames: 8");
